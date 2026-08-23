@@ -37,5 +37,3 @@ npm run preview
 - メールアドレスは初期HTMLへ平文で出力しない
 - DependabotでnpmとGitHub Actionsの更新を週次確認
 - `npm run check`と`npm audit`で静的検査・依存関係監査を実施
-
-`作品/`、`github-export/`、環境変数、ユーザーデータ、生成物は`.gitignore`で管理対象から除外しています。
