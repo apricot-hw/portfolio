@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contact } from '../data/site';
+---
+
+<BaseLayout title="Contact | Portfolio" description="連絡先ページ">
+  <section class="section container" style="margin-top: var(--space-10)">
+    <h1 class="section-title">Contact</h1>
+    <div class="card">
+      <p>制作やご連絡については、メールまたはGitHubからお願いいたします。</p>
+      <p class="contact-row">
+        <strong>Email:</strong>
+        <button class="email-reveal" type="button" data-email-reveal>メールアドレスを表示</button>
+        <span data-email-output aria-live="polite"></span>
+      </p>
+      <p><strong>GitHub:</strong> <a href={contact.githubUrl} target="_blank" rel="noreferrer">{contact.githubLabel}</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const revealButton = document.querySelector<HTMLButtonElement>('[data-email-reveal]');
+  const output = document.querySelector<HTMLElement>('[data-email-output]');
+
+  revealButton?.addEventListener('click', () => {
+    const characterCodes = [104, 111, 110, 109, 97, 119, 97, 116, 97, 114, 117, 46, 97, 112, 114, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
+    const address = String.fromCharCode(...characterCodes);
+    const link = document.createElement('a');
+    link.href = `mailto:${address}`;
+    link.textContent = address;
+    output?.replaceChildren(link);
+    revealButton.remove();
+  });
+</script>
+
+<style>
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .email-reveal {
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--accent-strong);
+    border-radius: 999px;
+    color: var(--text);
+    background: var(--accent-soft);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .email-reveal:hover {
+    filter: brightness(0.98);
+  }
+</style>

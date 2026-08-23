@@ -1,0 +1,37 @@
+---
+import type { WorkItem } from '../data/works';
+
+interface Props {
+  item: WorkItem;
+}
+
+const { item } = Astro.props;
+
+const statusLabelMap = {
+  prototype: 'Prototype',
+  study: 'Study',
+  release: 'Release',
+} as const;
+---
+
+<article class="card work-card">
+  <a class="work-thumbnail" href={`${import.meta.env.BASE_URL}works/${item.slug}/`} aria-label={`${item.title}の詳細を見る`}>
+    <img
+      src={`${import.meta.env.BASE_URL}${item.thumbnail.src}`}
+      alt={item.thumbnail.alt}
+      style={`object-position: ${item.thumbnail.position ?? 'center'}`}
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+  <p class="tag">{statusLabelMap[item.status]}</p>
+  <h3>{item.title}</h3>
+  <p>{item.summary}</p>
+  <div class="tags" aria-label="Tags">
+    {item.tags.map((tag) => <span class="tag">{tag}</span>)}
+  </div>
+  <p>
+    <small>{item.year} / {item.role}</small>
+  </p>
+  <a class="cta-link" href={`${import.meta.env.BASE_URL}works/${item.slug}/`}>View detail</a>
+</article>

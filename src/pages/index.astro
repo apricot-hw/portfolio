@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { contact, site, skillCategories, timeline } from '../data/site';
+import { works } from '../data/works';
+
+const pickedWorks = works.slice(0, 3);
+---
+
+<BaseLayout title={site.title} description={site.description}>
+  <section class="hero container">
+    <h1>{site.heroLead}</h1>
+    <p>{site.heroBody}</p>
+    <a class="cta-link" href={`${import.meta.env.BASE_URL}works/`}>作品一覧を見る</a>
+  </section>
+
+  <section class="interest-flow container" aria-label="制作の進め方">
+    <div>
+      <span>01</span>
+      <strong>好き・興味</strong>
+      <small>作りたい理由を見つける</small>
+    </div>
+    <span class="flow-arrow" aria-hidden="true">→</span>
+    <div>
+      <span>02</span>
+      <strong>調べて試す</strong>
+      <small>必要な技術を身につける</small>
+    </div>
+    <span class="flow-arrow" aria-hidden="true">→</span>
+    <div>
+      <span>03</span>
+      <strong>形にする</strong>
+      <small>使えるところまで作る</small>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">Selected Works</h2>
+    <div class="cards">
+      {pickedWorks.map((work) => <WorkCard item={work} />)}
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">Skills Snapshot</h2>
+    <p class="skills-guide">興味のあるものを作る過程で身につけた技術と、授業で学んだ内容を分野別にまとめています。</p>
+    <div class="skill-categories">
+      {skillCategories.map((category) => (
+        <section class="skill-category" aria-labelledby={`skill-${category.name}`}>
+          <h3 id={`skill-${category.name}`}>{category.name}</h3>
+          <div class="skills-grid">
+            {category.skills.map((skill) => (
+              <div class="skill-item">
+                <span class="skill-name">{skill.name}</span>
+                <span class="skill-level" role="img" aria-label={`${skill.name}の経験度は5段階中${skill.level}`}>
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <span class:list={['skill-dot', { 'skill-dot--filled': index < skill.level }]} aria-hidden="true"></span>
+                  ))}
+                </span>
+                <span class="skill-score" aria-hidden="true">{skill.level}/5</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">Timeline</h2>
+    <div class="grid-2">
+      {timeline.map((item) => (
+        <article class="card">
+          <p class="tag">{item.year}</p>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">Contact</h2>
+    <p>制作やご連絡については、<a href={contact.githubUrl} target="_blank" rel="noreferrer">GitHub</a>またはContactページからお願いいたします。</p>
+    <a class="cta-link" href={`${import.meta.env.BASE_URL}contact/`}>連絡先ページへ</a>
+  </section>
+</BaseLayout>

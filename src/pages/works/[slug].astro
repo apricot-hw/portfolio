@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { works } from '../../data/works';
+
+export async function getStaticPaths() {
+  return works.map((work) => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+const { work } = Astro.props;
+---
+
+<BaseLayout title={`${work.title} | Portfolio`} description={work.summary}>
+  <section class="section container" style="margin-top: var(--space-10)">
+    <p><a class="cta-link" href={`${import.meta.env.BASE_URL}works/`}>← 一覧に戻る</a></p>
+
+    <article class="card" style="margin-top: var(--space-5)">
+      <p class="tag">{work.year} / {work.role}</p>
+      <h1 class="section-title" style="margin-bottom: var(--space-3)">{work.title}</h1>
+      <p class="work-lead">{work.overview}</p>
+
+      {(work.liveUrl || work.repositoryUrl) && (
+        <p class="work-actions">
+          {work.liveUrl && (
+            <a class="cta-link" href={work.liveUrl} target="_blank" rel="noreferrer">
+              実際に使ってみる <span aria-hidden="true">↗</span>
+            </a>
+          )}
+          {work.repositoryUrl && (
+            <a class="cta-link" href={work.repositoryUrl} target="_blank" rel="noreferrer">
+              GitHubでソースを見る <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </p>
+      )}
+
+      {work.images && (
+        <div class="work-gallery" aria-label={`${work.title}の画面例`}>
+          {work.images.map((image) => (
+            <figure class="work-figure">
+              <button
+                class="work-image-button"
+                type="button"
+                data-lightbox-src={`${import.meta.env.BASE_URL}${image.src}`}
+                data-lightbox-alt={image.alt}
+                data-lightbox-caption={image.caption}
+                aria-label={`${image.caption}を拡大表示`}
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}${image.src}`}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <figcaption>{image.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+
+      {work.images && (
+        <dialog class="lightbox" data-lightbox>
+          <div class="lightbox-inner">
+            <button class="lightbox-close" type="button" data-lightbox-close aria-label="拡大表示を閉じる">×</button>
+            <img src="" alt="" data-lightbox-image />
+            <p data-lightbox-caption></p>
+          </div>
+        </dialog>
+      )}
+
+      <h2>目的</h2>
+      <p>{work.goal}</p>
+
+      <h2>主な機能</h2>
+      <ul class="detail-list">
+        {work.features.map((feature) => <li>{feature}</li>)}
+      </ul>
+
+      <h2>制作プロセス</h2>
+      <ol class="detail-list">
+        {work.process.map((step) => <li>{step}</li>)}
+      </ol>
+
+      <h2>学んだこと</h2>
+      <p>{work.learning}</p>
+
+      {work.note && <aside class="work-note">{work.note}</aside>}
+
+      <div class="tags" aria-label="Work tags">
+        {work.tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+    </article>
+  </section>
+</BaseLayout>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]');
+  const dialogImage = dialog?.querySelector<HTMLImageElement>('[data-lightbox-image]');
+  const dialogCaption = dialog?.querySelector<HTMLElement>('[data-lightbox-caption]');
+
+  document.querySelectorAll<HTMLButtonElement>('[data-lightbox-src]').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!dialog || !dialogImage || !dialogCaption) return;
+
+      dialogImage.src = button.dataset.lightboxSrc ?? '';
+      dialogImage.alt = button.dataset.lightboxAlt ?? '';
+      dialogCaption.textContent = button.dataset.lightboxCaption ?? '';
+      dialog.showModal();
+    });
+  });
+
+  dialog?.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close());
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>

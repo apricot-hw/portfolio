@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import { works } from '../../data/works';
+---
+
+<BaseLayout title="Works | Portfolio" description="作品一覧ページ">
+  <section class="section container" style="margin-top: var(--space-10)">
+    <h1 class="section-title">Works</h1>
+    <p>どの作品も、自分の好きなことや「こんなものが欲しい」という興味が出発点です。作るために必要な技術を調べ、試しながら完成させました。</p>
+
+    {
+      works.length > 0 ? (
+        <div class="cards" style="margin-top: var(--space-5)">
+          {works.map((work) => <WorkCard item={work} />)}
+        </div>
+      ) : (
+        <article class="card">
+          <h2 style="margin-top: 0">No works yet</h2>
+          <p>作品データを追加するとここにカードが表示されます。</p>
+        </article>
+      )
+    }
+  </section>
+</BaseLayout>

@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, timeline } from '../data/site';
+---
+
+<BaseLayout title="About | Portfolio" description="制作への考え方、これまでの経験、得意なことを紹介します。">
+  <section class="about-hero container">
+    <div class="about-intro">
+      <p class="tag">About {site.name}</p>
+      <h1>好きなことから、<br />技術を広げてきた。</h1>
+      <p class="about-lead">
+        私のものづくりは、いつも興味や好きなことから始まります。
+        MinecraftのMODやプラグインを作ってみたいという思いがJavaにつながり、ゲームやBotへの興味がPythonやWeb、サーバー、ネットワークへと発展してきました。
+      </p>
+    </div>
+    <div class="about-symbol" aria-hidden="true">
+      <span>&lt;/&gt;</span>
+      <small>learn & build</small>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">私について</h2>
+    <div class="about-copy card">
+      <p>
+        興味を持ったことをもっと知りたい、自分でも作ってみたいという気持ちが、学ぶ一番の原動力です。
+        最初から技術を学ぶことだけを目的にするのではなく、作りたいものを決め、実現に必要な知識を一つずつ調べて身につけてきました。
+      </p>
+      <p>
+        Javaを学び始めてから、特定の言葉を含む投稿をリツイートするTwitter Botや、対戦結果を記録するカウンターを制作しました。
+        その後はRubyでDiscord Botを作り、Pythonではゲームのキャラクター情報を画像にまとめるDiscord Bot
+        「BuildCardMaker」を制作しました。現在はJavaScriptを使ったWebアプリ「EXカウンター」の開発・運用にも取り組んでいます。
+      </p>
+      <p>
+        Minecraftのサーバー構築やポート開放を通してネットワークに興味を持ち、Raspberry Piを小型の自宅サーバーとして
+        Botの稼働にも利用しました。ソフトウェアだけでなく、自作PCの組み立てや中古PCのアップグレード、
+        その過程で発生した多くのトラブルへの切り分け・対処も経験しています。
+      </p>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">経験してきた分野</h2>
+    <div class="experience-grid">
+      <article class="card experience-card">
+        <p class="tag">Software</p>
+        <h3>プログラミング・Bot開発</h3>
+        <p>Java、Ruby、Python、JavaScriptを使い、用途に合わせたBotやデスクトップツール、Webアプリを制作してきました。</p>
+      </article>
+      <article class="card experience-card">
+        <p class="tag">Infrastructure</p>
+        <h3>サーバー・ネットワーク</h3>
+        <p>Minecraftサーバーの構築、ポート開放、Raspberry PiでのBot運用を経験しています。</p>
+        <p>宅内ネットワークのメッシュネットワーク化なども行いました。</p>
+      </article>
+      <article class="card experience-card">
+        <p class="tag">Hardware</p>
+        <h3>PC組み立て・問題解決</h3>
+        <p>中古デスクトップPCのアップグレードから始め、パーツ選定、1台をゼロから組む作業、故障原因の切り分けを経験しました。</p>
+      </article>
+      <article class="card experience-card">
+        <p class="tag">3D / Creative</p>
+        <h3>Unity</h3>
+        <p>Unityの基本操作と、既存3Dモデルの調整を行った経験があります。</p>
+      </article>
+      <article class="card experience-card experience-card--wide">
+        <p class="tag">Coursework</p>
+        <h3>授業で学んだこと</h3>
+        <p>AWS、Linux、Python、HTML、CSS、MySQL、AI、ネットワーク、アジャイル開発、UML、Swiftの基礎を学びました。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">大切にしていること</h2>
+    <div class="about-values">
+      <article class="card value-card">
+        <span class="value-number">01</span>
+        <h3>「好き」を出発点にする</h3>
+        <p>ゲームやPCなど、もっと知りたい、便利にしたいと思えることから制作テーマを見つけます。</p>
+      </article>
+      <article class="card value-card">
+        <span class="value-number">02</span>
+        <h3>必要なことを調べる</h3>
+        <p>作りたいものを実現するためなら、未知の言語やAPI、サーバー技術にも手を伸ばして試します。</p>
+      </article>
+      <article class="card value-card">
+        <span class="value-number">03</span>
+        <h3>興味を次へつなげる</h3>
+        <p>ひとつの制作で得た疑問や知識を、Botからサーバー、ネットワークのように次の分野へ発展させます。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">資格</h2>
+    <div class="qualification-card card">
+      <div class="qualification-mark" aria-hidden="true">FE</div>
+      <div>
+        <p class="tag">Information Technology</p>
+        <h3>基本情報技術者試験</h3>
+        <p>情報処理技術者試験 / Fundamental Information Technology Engineer Examination</p>
+      </div>
+      <span class="qualification-status">取得</span>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">これまで</h2>
+    <div class="about-timeline">
+      {timeline.map((item) => (
+        <article class="timeline-item">
+          <p class="timeline-year">{item.year}</p>
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="about-cta">
+      <div>
+        <p class="tag">Works</p>
+        <h2>制作物を見る</h2>
+        <p>好きなことから何を考え、どんな技術へ発展させたのかを紹介しています。</p>
+      </div>
+      <a class="cta-link" href={`${import.meta.env.BASE_URL}works/`}>作品一覧へ</a>
+    </div>
+  </section>
+</BaseLayout>
