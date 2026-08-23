@@ -65,7 +65,7 @@ export const timeline = [
   {
     year: '2026',
     title: 'EXカウンターを公開',
-    description: '端末間同期とオフライン対応を備えた記録Webアプリを開発。',
+    description: '端末間同期とオフライン対応を備えたゲーム周回記録Webアプリを開発。',
   },
   {
     year: '2023',
