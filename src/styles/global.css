@@ -137,6 +137,11 @@ a {
   box-shadow: var(--shadow-lift);
 }
 
+.work-detail-card:hover {
+  transform: none;
+  box-shadow: var(--shadow-soft);
+}
+
 .card h3 {
   margin-top: 0;
   margin-bottom: var(--space-3);

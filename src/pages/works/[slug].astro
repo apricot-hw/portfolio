@@ -17,7 +17,7 @@ const { work } = Astro.props;
   <section class="section section--page container">
     <p><a class="cta-link" href={withBase('works/')}>← 一覧に戻る</a></p>
 
-    <article class="card card--spaced">
+    <article class="card card--spaced work-detail-card">
       <p class="tag">{work.year} / {work.role}</p>
       <h1 class="section-title section-title--compact">{work.title}</h1>
       <p class="work-lead">{work.overview}</p>
