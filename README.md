@@ -1,57 +1,41 @@
-# Portfolio Template (Astro + GitHub Pages)
+# Honma Wataru Portfolio
 
-授業課題向けのポートフォリオ雛形です。  
-丸みのあるシンプルなデザインで、作品の中身は後で差し替えできる構成になっています。
+制作物、経験、スキルを紹介するAstro製ポートフォリオサイトです。GitHub Pagesへ自動デプロイできます。
 
-## Tech Stack
+## Requirements
 
-- Astro
-- TypeScript
-- CSS (Design Tokens)
-- GitHub Pages (GitHub Actions)
+- Node.js 22.12.0以上
+- npm
 
-## Local Development
-
-1. Node.js 20 以上をインストール
-2. 依存をインストール
+## Commands
 
 ```bash
 npm install
-```
-
-3. 開発サーバ起動
-
-```bash
 npm run dev
-```
-
-## Build
-
-```bash
+npm run check
 npm run build
 npm run preview
 ```
 
-## GitHub Pages Deploy
+## Structure
 
-1. GitHubリポジトリを作成して `main` へpush
-2. GitHubのSettings > Pagesで `Build and deployment` を `GitHub Actions` に設定
-3. `main` にpushすると `.github/workflows/deploy.yml` で自動公開
+- `src/data/site.ts`: サイト情報、スキル、タイムライン
+- `src/data/works.ts`: 作品データ
+- `src/pages/`: 各ページ
+- `src/components/`: 共通コンポーネント
+- `src/utils/paths.ts`: GitHub Pagesのベースパスを考慮したURL生成
+- `public/images/works/`: 作品画像
 
-公開URL例:
+## Deployment
 
-- https://YOUR_USER_NAME.github.io/REPOSITORY_NAME/
+`main`ブランチへのpushで`.github/workflows/deploy.yml`が実行され、GitHub Pagesへ公開されます。リポジトリ名はビルド時に取得されるため、サブパスへ自動的に反映されます。
 
-## 先に差し替える場所
+## Security
 
-- サイト基本情報: `src/data/site.ts`
-- 作品データ: `src/data/works.ts`
-- 自己紹介: `src/pages/about.astro`
-- 連絡先: `src/pages/contact.astro`
-- 詳細テンプレ項目: `src/pages/works/[slug].astro`
+- AstroのContent Security Policyを有効化
+- 外部リンクは新しいタブから元ページを操作できない設定
+- メールアドレスは初期HTMLへ平文で出力しない
+- DependabotでnpmとGitHub Actionsの更新を週次確認
+- `npm run check`と`npm audit`で静的検査・依存関係監査を実施
 
-## 注意点
-
-- リポジトリ名を変えるとURLのベースパスが変わります。
-- ActionsのBuildで `REPO_NAME` を使ってbase設定しているため、通常は自動追従します。
-- 現在の文章・連絡先はプレースホルダーです。提出前に必ず実データへ変更してください。
+`作品/`、`github-export/`、環境変数、ユーザーデータ、生成物は`.gitignore`で管理対象から除外しています。

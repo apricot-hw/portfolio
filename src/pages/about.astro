@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site, timeline } from '../data/site';
+import { withBase } from '../utils/paths';
 ---
 
 <BaseLayout title="About | Portfolio" description="制作への考え方、これまでの経験、得意なことを紹介します。">
@@ -127,7 +128,7 @@ import { site, timeline } from '../data/site';
         <h2>制作物を見る</h2>
         <p>好きなことから何を考え、どんな技術へ発展させたのかを紹介しています。</p>
       </div>
-      <a class="cta-link" href={`${import.meta.env.BASE_URL}works/`}>作品一覧へ</a>
+      <a class="cta-link" href={withBase('works/')}>作品一覧へ</a>
     </div>
   </section>
 </BaseLayout>

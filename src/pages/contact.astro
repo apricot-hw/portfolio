@@ -4,7 +4,7 @@ import { contact } from '../data/site';
 ---
 
 <BaseLayout title="Contact | Portfolio" description="連絡先ページ">
-  <section class="section container" style="margin-top: var(--space-10)">
+  <section class="section section--page container">
     <h1 class="section-title">Contact</h1>
     <div class="card">
       <p>制作やご連絡については、メールまたはGitHubからお願いいたします。</p>
@@ -13,7 +13,7 @@ import { contact } from '../data/site';
         <button class="email-reveal" type="button" data-email-reveal>メールアドレスを表示</button>
         <span data-email-output aria-live="polite"></span>
       </p>
-      <p><strong>GitHub:</strong> <a href={contact.githubUrl} target="_blank" rel="noreferrer">{contact.githubLabel}</a></p>
+      <p><strong>GitHub:</strong> <a href={contact.githubUrl} target="_blank" rel="noopener noreferrer">{contact.githubLabel}</a></p>
     </div>
   </section>
 </BaseLayout>

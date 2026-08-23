@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { works } from '../../data/works';
+import { withBase } from '../../utils/paths';
 
 export async function getStaticPaths() {
   return works.map((work) => ({
@@ -13,23 +14,23 @@ const { work } = Astro.props;
 ---
 
 <BaseLayout title={`${work.title} | Portfolio`} description={work.summary}>
-  <section class="section container" style="margin-top: var(--space-10)">
-    <p><a class="cta-link" href={`${import.meta.env.BASE_URL}works/`}>← 一覧に戻る</a></p>
+  <section class="section section--page container">
+    <p><a class="cta-link" href={withBase('works/')}>← 一覧に戻る</a></p>
 
-    <article class="card" style="margin-top: var(--space-5)">
+    <article class="card card--spaced">
       <p class="tag">{work.year} / {work.role}</p>
-      <h1 class="section-title" style="margin-bottom: var(--space-3)">{work.title}</h1>
+      <h1 class="section-title section-title--compact">{work.title}</h1>
       <p class="work-lead">{work.overview}</p>
 
       {(work.liveUrl || work.repositoryUrl) && (
         <p class="work-actions">
           {work.liveUrl && (
-            <a class="cta-link" href={work.liveUrl} target="_blank" rel="noreferrer">
+            <a class="cta-link" href={work.liveUrl} target="_blank" rel="noopener noreferrer">
               実際に使ってみる <span aria-hidden="true">↗</span>
             </a>
           )}
           {work.repositoryUrl && (
-            <a class="cta-link" href={work.repositoryUrl} target="_blank" rel="noreferrer">
+            <a class="cta-link" href={work.repositoryUrl} target="_blank" rel="noopener noreferrer">
               GitHubでソースを見る <span aria-hidden="true">↗</span>
             </a>
           )}
@@ -43,13 +44,13 @@ const { work } = Astro.props;
               <button
                 class="work-image-button"
                 type="button"
-                data-lightbox-src={`${import.meta.env.BASE_URL}${image.src}`}
+                data-lightbox-src={withBase(image.src)}
                 data-lightbox-alt={image.alt}
                 data-lightbox-caption={image.caption}
                 aria-label={`${image.caption}を拡大表示`}
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}${image.src}`}
+                  src={withBase(image.src)}
                   alt={image.alt}
                   loading="lazy"
                   decoding="async"
@@ -115,5 +116,9 @@ const { work } = Astro.props;
   dialog?.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close());
   dialog?.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
+  });
+  dialog?.addEventListener('close', () => {
+    dialogImage?.removeAttribute('src');
+    if (dialogCaption) dialogCaption.textContent = '';
   });
 </script>

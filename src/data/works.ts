@@ -4,12 +4,12 @@ export type WorkItem = {
   summary: string;
   year: string;
   role: string;
-  tags: string[];
+  tags: readonly string[];
   status: 'prototype' | 'study' | 'release';
   overview: string;
   goal: string;
-  process: string[];
-  features: string[];
+  process: readonly string[];
+  features: readonly string[];
   learning: string;
   note?: string;
   repositoryUrl?: string;
@@ -17,7 +17,7 @@ export type WorkItem = {
   thumbnail: {
     src: string;
     alt: string;
-    position?: string;
+    position?: 'center' | 'center top';
   };
   images?: {
     src: string;
@@ -27,7 +27,7 @@ export type WorkItem = {
   }[];
 };
 
-export const works: WorkItem[] = [
+export const works = [
   {
     slug: 'fe-subject-b',
     title: '基本情報技術者試験 学習サイト',
@@ -184,4 +184,4 @@ export const works: WorkItem[] = [
       '初めてGUIアプリの構造を調べ、画面部品の配置、ボタンイベント、状態の保持と表示更新を実装しました。自分が欲しい道具を、調査しながら動く形にする原点となった作品です。',
     note: '生成AIのない時期に、JavaやSwingの使い方を自分で調べながら制作しました。',
   },
-];
+] satisfies readonly WorkItem[];

@@ -166,6 +166,27 @@ a {
   transition: transform 0.25s ease;
 }
 
+.work-thumbnail img.thumbnail-top {
+  object-position: center top;
+}
+
+.section--page {
+  margin-top: var(--space-10);
+}
+
+.card--spaced,
+.cards--spaced {
+  margin-top: var(--space-5);
+}
+
+.section-title--compact {
+  margin-bottom: var(--space-3);
+}
+
+.flush-top {
+  margin-top: 0;
+}
+
 .work-thumbnail:hover img,
 .work-thumbnail:focus-visible img {
   transform: scale(1.025);

@@ -8,4 +8,20 @@ const isDev = process.env.NODE_ENV === 'development';
 export default defineConfig({
   site: siteUrl,
   base: isDev ? '/' : isUserSite ? '/' : `/${repoName}/`,
+  markdown: {
+    syntaxHighlight: false,
+  },
+  security: {
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "connect-src 'self'",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+      ],
+    },
+  },
 });

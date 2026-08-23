@@ -1,11 +1,13 @@
 ---
 import type { WorkItem } from '../data/works';
+import { withBase } from '../utils/paths';
 
 interface Props {
   item: WorkItem;
 }
 
 const { item } = Astro.props;
+const detailUrl = withBase(`works/${item.slug}/`);
 
 const statusLabelMap = {
   prototype: 'Prototype',
@@ -15,11 +17,11 @@ const statusLabelMap = {
 ---
 
 <article class="card work-card">
-  <a class="work-thumbnail" href={`${import.meta.env.BASE_URL}works/${item.slug}/`} aria-label={`${item.title}の詳細を見る`}>
+  <a class="work-thumbnail" href={detailUrl} aria-label={`${item.title}の詳細を見る`}>
     <img
-      src={`${import.meta.env.BASE_URL}${item.thumbnail.src}`}
+      src={withBase(item.thumbnail.src)}
       alt={item.thumbnail.alt}
-      style={`object-position: ${item.thumbnail.position ?? 'center'}`}
+      class:list={{ 'thumbnail-top': item.thumbnail.position === 'center top' }}
       loading="lazy"
       decoding="async"
     />
@@ -33,5 +35,5 @@ const statusLabelMap = {
   <p>
     <small>{item.year} / {item.role}</small>
   </p>
-  <a class="cta-link" href={`${import.meta.env.BASE_URL}works/${item.slug}/`}>View detail</a>
+  <a class="cta-link" href={detailUrl}>View detail</a>
 </article>
